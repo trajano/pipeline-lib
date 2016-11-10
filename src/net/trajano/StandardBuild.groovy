@@ -20,7 +20,7 @@ class StandardBuild implements Serializable {
      */
     def noop() {
         steps.node {
-            steps.stage(stages['scm']) {
+            steps.stage(stages['checkout']) {
                 steps.sh("env")
             }
             steps.stage(stages['build']) {
