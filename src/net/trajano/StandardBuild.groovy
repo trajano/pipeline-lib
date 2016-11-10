@@ -17,16 +17,21 @@ class StandardBuild implements Serializable {
     }
 
     /**
+     * Checks out code from SCM.
+     */
+    private def checkoutScm() {
+        steps.stage(stages['checkout']) {
+            steps.checkout scm
+        }
+    }
+    /**
      * This does nothing, it is primarily used to test if the build
      * environment is working.
      */
     def noop() {
         steps.node {
-            steps.stage(stages['checkout']) {
-                steps.checkout scm
-            }
+            checkoutScm()
             steps.stage(stages['build']) {
-                steps.sh("env")
             }
         }
     }
