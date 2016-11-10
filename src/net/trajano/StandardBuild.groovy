@@ -7,7 +7,7 @@ import java.util.Properties
  */
 class StandardBuild implements Serializable {
     def steps
-    def stages
+    Map<String,String> stages
     StandardBuild(steps) {
         this.steps = steps
         stages = new Properties()
