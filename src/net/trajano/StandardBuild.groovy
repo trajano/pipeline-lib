@@ -7,9 +7,11 @@ import java.util.Properties
  */
 class StandardBuild implements Serializable {
     def steps
+    def scm
     Map<String,String> stages
-    StandardBuild(steps) {
+    StandardBuild(steps, scm) {
         this.steps = steps
+        this.scm = scm
         stages = new Properties()
         stages.load(new StringReader(steps.libraryResource("Stages.properties")))
     }
@@ -21,7 +23,7 @@ class StandardBuild implements Serializable {
     def noop() {
         steps.node {
             steps.stage(stages['checkout']) {
-                steps.sh("env")
+                steps.checkout scm
             }
             steps.stage(stages['build']) {
                 steps.sh("env")
