@@ -1,4 +1,4 @@
 @Library("trajano-pipeline-lib@master")
 import net.trajano.StandardBuild
 
-StandardBuild.noop()
+new StandardBuild(steps).noop()
