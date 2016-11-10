@@ -14,19 +14,16 @@ class StandardBuild implements Serializable {
         stages.load(new StringReader(steps.libraryResource("Stages.properties")))
     }
 
-    private def nstage(key) {
-        return steps.stage(key)
-    }
     /**
      * This does nothing, it is primarily used to test if the build
      * environment is working.
      */
     def noop() {
         steps.node {
-            nstage("scm") {
-                //steps.checkout(steps.scm)
+            steps.stage(stages['scm']) {
+                steps.sh("env")
             }
-            nstage("build") {
+            steps.stage(stages['build']) {
                 steps.sh("env")
             }
         }
